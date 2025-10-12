@@ -1,0 +1,80 @@
+.postbox {
+  background: #3aa39a; /* teal */
+  border-radius: 8px;
+  padding: 18px;
+  color: #102025;
+  max-width: 820px;
+  margin: 18px auto;
+  box-shadow: 0 0 0 6px rgba(0,0,0,0.35) inset; /* mimic dark side panel */
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+.postbox-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.postbox-avatar {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.12) inset;
+}
+
+.postbox-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.postbox-name {
+  font-weight: 700;
+  font-size: 18px;
+  color: #083a3a;
+}
+
+.postbox-time {
+  font-size: 12px;
+  color: rgba(8,58,58,0.7);
+}
+
+.postbox-content {
+  background: rgba(255,255,255,0.08);
+  border-radius: 4px;
+  padding: 12px 14px;
+  margin: 6px 0 10px 0;
+  border-top: 4px solid #1ea8f2; /* bright blue top border */
+  color: #052727;
+  line-height: 1.45;
+}
+
+.postbox-content p {
+  margin: 0;
+}
+
+.postbox-actions {
+  display: flex;
+  gap: 28px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+.postbox-actions .action {
+  background: transparent;
+  border: none;
+  color: rgba(8,58,58,0.9);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 6px 0;
+}
+
+.postbox-actions .action:hover {
+  color: #064b4b;
+}
+
+@media (max-width: 640px) {
+  .postbox { padding: 12px; max-width: 96%; }
+  .postbox-actions { gap: 18px; }
+}
