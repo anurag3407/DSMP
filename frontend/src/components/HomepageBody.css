@@ -1,0 +1,60 @@
+.homepage-body {
+  padding: 18px 24px;
+  background: #e6f7f4; /* pale teal background for the main area */
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* inner container centers content within the body column */
+.homepage-inner {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.composer {
+  background: #8ed6cc;
+  padding: 12px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 12px 0 18px 0;
+}
+
+.composer-input {
+  width: 100%;
+  min-height: 64px;
+  resize: vertical;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+}
+
+.composer-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.send-btn {
+  background: #7b4cf6;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.feed {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 8px 0 80px 0;
+}
+
+@media (max-width: 720px) {
+  .composer, .feed { max-width: 96%; }
+}
