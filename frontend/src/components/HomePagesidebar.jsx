@@ -9,16 +9,21 @@ const SidebarItem = ({ icon, label }) => (
   </div>
 );
 
-const HomePagesidebar = ({ user = { name: 'Rahul Yadav', id: 'id - 0xF8a34cde9657' } }) => {
+const HomePagesidebar = ({ userAddress, profile, balance, onLogout }) => {
+  const displayName = profile ? profile.username : 'Loading...';
+  const displayId = userAddress ? `id - ${userAddress.slice(0, 6)}...${userAddress.slice(-4)}` : 'id - Loading...';
+  const displayBalance = balance ? `${parseFloat(balance).toFixed(4)} ETH` : 'Balance: Loading...';
+
   return (
     <aside className="sidebar">
       <div className="profile-card">
         <div className="profile-avatar">
-          <img src={avatarImg} alt={user.name} />
+          <img src={avatarImg} alt={displayName} />
         </div>
         <div className="profile-info">
-          <div className="profile-name">{user.name}</div>
-          <div className="profile-id">{user.id}</div>
+          <div className="profile-name">{displayName}</div>
+          <div className="profile-id">{displayId}</div>
+          <div className="profile-balance">{displayBalance}</div>
         </div>
       </div>
 
@@ -29,7 +34,7 @@ const HomePagesidebar = ({ user = { name: 'Rahul Yadav', id: 'id - 0xF8a34cde965
       </nav>
 
       <div className="sidebar-logout">
-        <button className="logout-btn">Log Out</button>
+        <button className="logout-btn" onClick={onLogout}>Log Out</button>
       </div>
     </aside>
   );
