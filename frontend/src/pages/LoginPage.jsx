@@ -1,6 +1,6 @@
 import React from 'react'
 import LoginPageHeader from '../components/LoginPageHeader'
-import LoginPageBody from '../components/loginPageBody'
+import LoginPageBody from '../components/LoginPageBody'
 
 const LoginPage = ({ onLogin }) => {
   return (

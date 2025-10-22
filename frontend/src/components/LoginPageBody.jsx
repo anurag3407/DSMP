@@ -1,6 +1,7 @@
 import React from "react";
 import mainImage from "../assets/mainLoginPageImage.png";
 import metamaskIcon from "../assets/Metamaskicon.png";
+import { connectWallet } from "../utils/web3.js";
 
 const getResponsiveBodyStyles = () => {
   const width = window.innerWidth;
@@ -186,9 +187,14 @@ const LoginPageBody = ({ onLogin }) => {
             e.target.style.transform = "translateY(0)";
             e.target.style.boxShadow = "0 8px 25px rgba(139, 92, 246, 0.3)";
           }}
-          onClick={() => {
-            // simulate a successful login (wallet connect)
-            if (typeof onLogin === 'function') onLogin();
+          onClick={async () => {
+            try {
+              const address = await connectWallet();
+              if (typeof onLogin === 'function') onLogin(address);
+            } catch (error) {
+              console.error('Failed to connect wallet:', error);
+              alert('Failed to connect wallet. Please make sure MetaMask is installed and try again.');
+            }
           }}
         >
           METAMASK

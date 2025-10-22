@@ -1,38 +1,73 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Postbox from './Postbox';
 import './HomepageBody.css';
+import { getFeed, createPost, getProfile } from '../utils/web3.js';
 
-const initialPosts = [
-	{
-		id: 1,
-		name: 'Neha Sharma',
-		time: '2 days ago',
-		content:
-			"Frontend development is all about what you see and interact with in your browser. Think of it as the 'client-side.' This involves mastering languages like HTML for structuring content, CSS for styling and layout, and JavaScript for adding interactivity and dynamic behavior...",
-	},
-	{
-		id: 2,
-		name: 'Neha Sharma',
-		time: '2 days ago',
-		content:
-			"Choosing the \"best\" testnet largely depends on the blockchain you're developing for. For Ethereum-based dApps, Sepolia and Holesky are currently the most recommended testnets...",
-	},
-];
-
-const HomepageBody = () => {
-	const [posts, setPosts] = useState(initialPosts);
+const HomepageBody = ({ userAddress }) => {
+	const [posts, setPosts] = useState([]);
 	const [text, setText] = useState('');
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState(null);
 
-	const addPost = () => {
+	const fetchFeed = async () => {
+		if (!userAddress) return;
+		try {
+			setLoading(true);
+			setError(null);
+			const feed = await getFeed(userAddress);
+			// Fetch profiles for each post author
+			const postsWithProfiles = await Promise.all(
+				feed.map(async (post) => {
+					try {
+						const profile = await getProfile(post.author);
+						const timeAgo = getTimeAgo(parseInt(post.timestamp));
+						return {
+							id: post.id,
+							name: profile.username || post.author.slice(0, 6) + '...',
+							time: timeAgo,
+							content: post.content,
+							author: post.author
+						};
+					} catch (err) {
+						console.error('Error fetching profile for', post.author, err);
+						const timeAgo = getTimeAgo(parseInt(post.timestamp));
+						return {
+							id: post.id,
+							name: post.author.slice(0, 6) + '...',
+							time: timeAgo,
+							content: post.content,
+							author: post.author
+						};
+					}
+				})
+			);
+			setPosts(postsWithProfiles);
+		} catch (err) {
+			console.error('Error fetching feed:', err);
+			setError('Failed to load feed. Please try again.');
+		} finally {
+			setLoading(false);
+		}
+	};
+
+	useEffect(() => {
+		fetchFeed();
+	}, [userAddress]);
+
+	const addPost = async () => {
 		if (!text.trim()) return;
-		const newPost = {
-			id: Date.now(),
-			name: 'You',
-			time: 'just now',
-			content: text.trim(),
-		};
-		setPosts([newPost, ...posts]);
-		setText('');
+		try {
+			setLoading(true);
+			await createPost(text.trim());
+			setText('');
+			// Refresh feed after posting
+			await fetchFeed();
+		} catch (err) {
+			console.error('Error creating post:', err);
+			setError('Failed to create post. Please try again.');
+		} finally {
+			setLoading(false);
+		}
 	};
 
 	const onKeyDown = (e) => {
@@ -41,31 +76,47 @@ const HomepageBody = () => {
 		}
 	};
 
-		return (
-			<div className="homepage-body">
-				<div className="homepage-inner">
-					<div className="composer">
-				<textarea
-					className="composer-input"
-					placeholder="What's on your mind?"
-					value={text}
-					onChange={(e) => setText(e.target.value)}
-					onKeyDown={onKeyDown}
-				/>
-				<div className="composer-actions">
-					<button className="send-btn" onClick={addPost}>
-						Post
-					</button>
-				</div>
-						</div>
+	const getTimeAgo = (timestamp) => {
+		const now = Date.now() / 1000;
+		const diff = now - timestamp;
+		if (diff < 60) return 'just now';
+		if (diff < 3600) return `${Math.floor(diff / 60)} minutes ago`;
+		if (diff < 86400) return `${Math.floor(diff / 3600)} hours ago`;
+		return `${Math.floor(diff / 86400)} days ago`;
+	};
 
-						<div className="feed">
-				{posts.map((p) => (
-					<Postbox key={p.id} name={p.name} time={p.time} content={p.content} />
-				))}
-						</div>
+	return (
+		<div className="homepage-body">
+			<div className="homepage-inner">
+				<div className="composer">
+					<textarea
+						className="composer-input"
+						placeholder="What's on your mind?"
+						value={text}
+						onChange={(e) => setText(e.target.value)}
+						onKeyDown={onKeyDown}
+						disabled={loading}
+					/>
+					<div className="composer-actions">
+						<button className="send-btn" onClick={addPost} disabled={loading || !text.trim()}>
+							{loading ? 'Posting...' : 'Post'}
+						</button>
 					</div>
 				</div>
+
+				{error && <div style={{ color: 'red', padding: '10px' }}>{error}</div>}
+
+				<div className="feed">
+					{loading && posts.length === 0 ? (
+						<div>Loading feed...</div>
+					) : (
+						posts.map((p) => (
+							<Postbox key={p.id} name={p.name} time={p.time} content={p.content} />
+						))
+					)}
+				</div>
+			</div>
+		</div>
 	);
 };
 
