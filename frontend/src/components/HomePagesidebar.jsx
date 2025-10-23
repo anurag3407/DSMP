@@ -1,6 +1,7 @@
 import React from 'react';
 import './HomePagesidebar.css';
 import avatarImg from '../assets/user.png';
+import { Link } from 'react-router-dom';
 
 const SidebarItem = ({ icon, label }) => (
   <div className="sidebar-item">
@@ -9,14 +10,22 @@ const SidebarItem = ({ icon, label }) => (
   </div>
 );
 
-const HomePagesidebar = ({ userAddress, profile, balance, onLogout }) => {
+const HomePagesidebar = ({ userAddress, profile, balance, onLogout, onProfileClick }) => {
   const displayName = profile ? profile.username : 'Loading...';
   const displayId = userAddress ? `id - ${userAddress.slice(0, 6)}...${userAddress.slice(-4)}` : 'id - Loading...';
   const displayBalance = balance ? `${parseFloat(balance).toFixed(4)} ETH` : 'Balance: Loading...';
 
+  const Wrapper = onProfileClick
+    ? ({ children }) => (
+        <div className="profile-card" onClick={onProfileClick} role="button" tabIndex={0} onKeyPress={(e)=>{ if(e.key === 'Enter') onProfileClick && onProfileClick() }} style={{ cursor: 'pointer' }}>{children}</div>
+      )
+    : ({ children }) => (
+        <Link to="/profile" className="profile-card" style={{ textDecoration: 'none', color: 'inherit' }}>{children}</Link>
+      )
+
   return (
     <aside className="sidebar">
-      <div className="profile-card">
+      <Wrapper>
         <div className="profile-avatar">
           <img src={avatarImg} alt={displayName} />
         </div>
@@ -25,7 +34,7 @@ const HomePagesidebar = ({ userAddress, profile, balance, onLogout }) => {
           <div className="profile-id">{displayId}</div>
           <div className="profile-balance">{displayBalance}</div>
         </div>
-      </div>
+      </Wrapper>
 
       <nav className="sidebar-nav">
         <SidebarItem icon="🏠" label="Home" />

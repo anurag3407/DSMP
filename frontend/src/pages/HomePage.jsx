@@ -5,7 +5,7 @@ import HomepageBody from "../components/HomepageBody";
 import { getProfile, getProvider } from '../utils/web3.js';
 import { ethers } from 'ethers';
 
-const HomePage = ({ userAddress, onLogout }) => {
+const HomePage = ({ userAddress, onLogout, navigate }) => {
   const [profile, setProfile] = useState(null);
   const [balance, setBalance] = useState(null);
 
@@ -40,8 +40,8 @@ const HomePage = ({ userAddress, onLogout }) => {
     <div style={{ margin: 0, padding: 0, width: '100%' }}>
       <HomepageHeader userAddress={userAddress} />
       <div style={{ display: 'flex', gap: 18, alignItems: 'flex-start', padding: '12px 18px' }}>
-        <div style={{ flex: '0 0 220px' }}>
-          <HomePagesidebar userAddress={userAddress} profile={profile} balance={balance} onLogout={onLogout} />
+          <div style={{ flex: '0 0 220px' }}>
+          <HomePagesidebar userAddress={userAddress} profile={profile} balance={balance} onLogout={onLogout} onProfileClick={() => navigate && navigate('profile')} />
         </div>
 
         <div style={{ flex: 1 }}>
