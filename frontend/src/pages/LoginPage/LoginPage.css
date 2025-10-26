@@ -1,0 +1,315 @@
+.login-page {
+  min-height: 100vh;
+  background-color: var(--color-background);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.login-header {
+  height: var(--size-header);
+  background-color: var(--color-primary);
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.login-header-content {
+  height: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-xxl);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.login-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.logo-icon {
+  font-size: 32px;
+  color: var(--color-white);
+}
+
+.logo-text {
+  font-size: var(--font-size-xxl);
+  font-weight: 700;
+  color: var(--color-white);
+}
+
+.login-profile-placeholder {
+  width: 48px;
+  height: 48px;
+  background-color: var(--color-background);
+  border-radius: var(--radius-circle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  color: var(--color-primary);
+}
+
+/* Main Content */
+.login-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xxxxl) var(--spacing-lg);
+}
+
+.login-content {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xxxxl);
+}
+
+/* Hero Section */
+.login-hero {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xxl);
+}
+
+.login-title {
+  font-size: var(--font-size-xxxxl);
+  font-weight: 700;
+  color: var(--color-text-bold);
+  line-height: 1.2;
+  max-width: 600px;
+}
+
+.login-subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--color-text-gray);
+  line-height: 1.5;
+}
+
+.connect-wallet-btn {
+  min-width: 280px;
+}
+
+/* Info Panels */
+.login-info-panels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-xxl);
+  width: 100%;
+}
+
+.info-panel {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+.info-icon-wrapper {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-circle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: var(--color-white);
+}
+
+.info-icon-wrapper.primary {
+  background-color: var(--color-primary);
+}
+
+.info-icon-wrapper.secondary {
+  background-color: var(--color-primary-dark);
+}
+
+.info-panel h3 {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--color-text-bold);
+}
+
+.info-panel p {
+  font-size: var(--font-size-base);
+  color: var(--color-text-gray);
+  line-height: 1.5;
+}
+
+/* Registration */
+.registration-content {
+  width: 100%;
+  max-width: 420px;
+}
+
+.registration-card {
+  padding: var(--spacing-xxxl);
+}
+
+.registration-title {
+  font-size: var(--font-size-xxl);
+  font-weight: 700;
+  color: var(--color-text-bold);
+  text-align: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.registration-subtitle {
+  font-size: var(--font-size-base);
+  color: var(--color-text-gray);
+  text-align: center;
+  margin-bottom: var(--spacing-xxl);
+}
+
+.registration-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+/* Form Elements */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.form-label {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--color-text-dark);
+}
+
+.required-star {
+  color: var(--color-error);
+  margin-left: var(--spacing-xs);
+}
+
+.form-select {
+  width: 100%;
+  padding: var(--spacing-md);
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  color: var(--color-text-dark);
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  outline: none;
+  transition: border-color var(--transition-fast);
+  cursor: pointer;
+}
+
+.form-select:focus {
+  border-color: var(--color-primary);
+}
+
+.form-select.input-error {
+  border-color: var(--color-error);
+}
+
+.error-message {
+  font-size: var(--font-size-xs);
+  color: var(--color-error);
+}
+
+/* Profile Picture Upload */
+.profile-picture-upload {
+  display: flex;
+  justify-content: center;
+}
+
+.profile-picture-preview {
+  cursor: pointer;
+  position: relative;
+}
+
+.profile-picture-placeholder {
+  width: 104px;
+  height: 104px;
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-circle);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  font-size: 32px;
+  color: var(--color-text-silver);
+  transition: all var(--transition-fast);
+}
+
+.profile-picture-placeholder:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+.profile-picture-placeholder span {
+  font-size: var(--font-size-xs);
+}
+
+.file-input-hidden {
+  display: none;
+}
+
+/* Footer */
+.login-footer {
+  background-color: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  padding: var(--spacing-lg) var(--spacing-xxl);
+  margin-top: auto;
+}
+
+.wallet-address-display {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.wallet-icon {
+  font-size: 20px;
+  color: var(--color-primary);
+}
+
+.wallet-label {
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.wallet-address {
+  font-family: 'Monaco', 'Courier New', monospace;
+  color: var(--color-primary);
+  font-weight: 600;
+  background-color: var(--color-background);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .login-title {
+    font-size: var(--font-size-xxxl);
+  }
+  
+  .login-info-panels {
+    grid-template-columns: 1fr;
+  }
+  
+  .registration-card {
+    padding: var(--spacing-xxl);
+  }
+}
