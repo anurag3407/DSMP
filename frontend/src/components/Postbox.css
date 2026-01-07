@@ -1,80 +1,95 @@
 .postbox {
-  background: #3aa39a; /* teal */
-  border-radius: 8px;
-  padding: 18px;
-  color: #102025;
-  max-width: 820px;
-  margin: 18px auto;
-  box-shadow: 0 0 0 6px rgba(0,0,0,0.35) inset; /* mimic dark side panel */
-  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
 .postbox-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
 }
 
 .postbox-avatar {
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: 0 1px 0 rgba(255,255,255,0.12) inset;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #8B5CF6 0%, #A855F7 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
 }
 
-.postbox-meta {
-  display: flex;
-  flex-direction: column;
+.postbox-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
 }
 
 .postbox-name {
-  font-weight: 700;
-  font-size: 18px;
-  color: #083a3a;
+    font-weight: 600;
+    color: #1a1a2e;
 }
 
 .postbox-time {
-  font-size: 12px;
-  color: rgba(8,58,58,0.7);
+    color: #888;
+    font-size: 13px;
+}
+
+.postbox-actions-owner {
+    display: flex;
+    gap: 8px;
+}
+
+.action-btn {
+    background: none;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #666;
+}
+
+.action-btn:hover {
+    background: #f0f0f0;
 }
 
 .postbox-content {
-  background: rgba(255,255,255,0.08);
-  border-radius: 4px;
-  padding: 12px 14px;
-  margin: 6px 0 10px 0;
-  border-top: 4px solid #1ea8f2; /* bright blue top border */
-  color: #052727;
-  line-height: 1.45;
+    color: #333;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 16px;
 }
 
-.postbox-content p {
-  margin: 0;
+.postbox-footer {
+    display: flex;
+    gap: 24px;
+    padding-top: 12px;
+    border-top: 1px solid #eee;
 }
 
-.postbox-actions {
-  display: flex;
-  gap: 28px;
-  padding-top: 8px;
-  border-top: 1px solid rgba(0,0,0,0.06);
+.footer-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: none;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    color: #666;
 }
 
-.postbox-actions .action {
-  background: transparent;
-  border: none;
-  color: rgba(8,58,58,0.9);
-  font-size: 16px;
-  cursor: pointer;
-  padding: 6px 0;
+.footer-btn:hover {
+    background: #f5f5f5;
 }
 
-.postbox-actions .action:hover {
-  color: #064b4b;
-}
-
-@media (max-width: 640px) {
-  .postbox { padding: 12px; max-width: 96%; }
-  .postbox-actions { gap: 18px; }
+.footer-btn.liked {
+    color: #EF4444;
 }
