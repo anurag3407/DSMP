@@ -5,9 +5,11 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import LinkIcon from '@mui/icons-material/Link';
 
 const Postbox = ({
 	id,
+	blockchainId,
 	name,
 	time,
 	content,
@@ -16,6 +18,7 @@ const Postbox = ({
 	likesCount = 0,
 	commentsCount = 0,
 	hasLiked = false,
+	isOnChain = false,
 	onLike,
 	onUnlike,
 	onEdit,
@@ -63,15 +66,21 @@ const Postbox = ({
 		}
 	};
 
+	// Generate short address for display
+	const shortAuthor = author ? `@${author.slice(0, 6)}...${author.slice(-4)}` : '';
+
 	return (
 		<div className="postbox">
 			<div className="postbox-header">
 				<div className="postbox-avatar">
 					{name.charAt(0).toUpperCase()}
 				</div>
-				<div className="postbox-info">
-					<span className="postbox-name">{name}</span>
-					<span className="postbox-time">{time}</span>
+				<div className="postbox-main">
+					<div className="postbox-info">
+						<span className="postbox-name">{name}</span>
+						<span className="postbox-handle">{shortAuthor}</span>
+						<span className="postbox-time">{time}</span>
+					</div>
 				</div>
 				{isOwner && (
 					<div className="postbox-actions-owner">
@@ -94,6 +103,13 @@ const Postbox = ({
 			</div>
 
 			<div className="postbox-content">{content}</div>
+
+			{isOnChain && (
+				<div className="blockchain-indicator verified">
+					<LinkIcon fontSize="small" />
+					<span>On-chain verified</span>
+				</div>
+			)}
 
 			<div className="postbox-footer">
 				<button
@@ -123,7 +139,11 @@ const Postbox = ({
 							onChange={(e) => setEditContent(e.target.value)}
 							placeholder="Edit your post..."
 							rows={4}
+							maxLength={280}
 						/>
+						<div style={{ fontSize: '13px', color: '#71767b', marginTop: '8px' }}>
+							{editContent.length}/280
+						</div>
 						<div className="modal-actions">
 							<button className="btn-cancel" onClick={() => setShowEditModal(false)}>
 								Cancel
